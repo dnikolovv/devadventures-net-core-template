@@ -1,6 +1,12 @@
 # .NET Core Web API Template
 This template is available in the [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=dnikolovv.dev-adventures-project-setup#overview).
 
+After installing the VSIX you will see the template available under Visual C#:
+
+![template-in-vs](https://devadventures.net/wp-content/uploads/2018/06/template-in-vs.png)
+
+---
+
 ## Features
 
 ### Web API
