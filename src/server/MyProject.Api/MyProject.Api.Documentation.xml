@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyProject.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MyProject.Api.Controllers.OptionController.Get(Optional.Option{System.String},Optional.Option{System.Int32},Optional.Option{System.Boolean})">
+            <summary>
+            Demonstrates the Option model binding with query string parameters. Cannot be tested from the Swagger UI.
+            </summary>
+            <param name="text">A string query parameter.</param>
+            <param name="number">A number query parameter.</param>
+            <param name="flag">A boolean query parameter.</param>
+            <returns>A model showing the bound data.</returns>
+            <response code="200">The model was bound successfully.</response>
+            <response code="400">When it could not parse some of the inputted data.</response>
+        </member>
+        <member name="M:MyProject.Api.Controllers.UsersController.Login(MyProject.Core.Models.LoginUserModel)">
+            <summary>
+            Login.
+            </summary>
+            <param name="model">The credentials.</param>
+            <returns>A JWT token.</returns>
+            <response code="200">If the credentials have a match.</response>
+            <response code="400">If the credentials don't match/don't meet the requirements.</response>
+        </member>
+        <member name="M:MyProject.Api.Controllers.UsersController.Register(MyProject.Core.Models.RegisterUserModel)">
+            <summary>
+            Register.
+            </summary>
+            <param name="model">The user model.</param>
+            <returns>A user model.</returns>
+            <response code="201">A user was created.</response>
+            <response code="400">Invalid input.</response>
+        </member>
+    </members>
+</doc>
