@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using MyProject.Core.Configuration;
 using MyProject.Core.Identity;
-using Microsoft.Extensions.Options;
 
 namespace MyProject.Business.Identity
 {
@@ -17,7 +19,7 @@ namespace MyProject.Business.Identity
             ThrowIfInvalidOptions(_jwtOptions);
         }
 
-        public string GenerateEncodedToken(string userId, string email)
+        public string GenerateEncodedToken(string userId, string email, IEnumerable<Claim> additionalClaims)
         {
             var claims = new[]
             {
@@ -25,9 +27,8 @@ namespace MyProject.Business.Identity
                 new Claim(JwtRegisteredClaimNames.Email, email),
                 new Claim(JwtRegisteredClaimNames.Jti, _jwtOptions.JtiGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
-
-                // Add additional claims here (rights, etc.)
-            };
+            }
+            .Concat(additionalClaims);
 
             var jwt = new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,

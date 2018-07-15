@@ -1,4 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MyProject.Api.Configuration;
 using MyProject.Api.Filters;
 using MyProject.Api.ModelBinders;
@@ -8,11 +13,6 @@ using MyProject.Core.Configuration;
 using MyProject.Core.Identity;
 using MyProject.Core.Services;
 using MyProject.Data.EntityFramework;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace MyProject.Api
 {
@@ -52,12 +52,12 @@ namespace MyProject.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseSwagger("My Web API.");
                 dbContext.Database.EnsureCreated();
             }
 
             loggerFactory.AddLogging(Configuration.GetSection("Logging"));
 
+            app.UseSwagger("My Web API.");
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc();

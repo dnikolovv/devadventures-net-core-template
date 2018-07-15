@@ -1,14 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Moq;
+using Shouldly;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using MyProject.Business.Services;
 using MyProject.Core.Identity;
 using MyProject.Core.Models;
 using MyProject.Data.Entities;
-using Microsoft.AspNetCore.Identity;
-using Moq;
-using Shouldly;
 using Xunit;
 
 namespace MyProject.Business.Tests.Services
@@ -42,7 +44,7 @@ namespace MyProject.Business.Tests.Services
             MockCheckPassword(expectedUser, model.Password, true);
 
             _jwtFactoryMock.Setup(jwtFactory => jwtFactory
-                .GenerateEncodedToken(expectedUser.Id, expectedUser.Email))
+                .GenerateEncodedToken(expectedUser.Id, expectedUser.Email, new List<Claim>()))
                 .Returns(expectedJwt);
 
             // Act

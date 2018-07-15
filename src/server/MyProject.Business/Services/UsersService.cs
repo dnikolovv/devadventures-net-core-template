@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Optional;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
+using System.Linq;
+using System.Security.Claims;
 using MyProject.Business.Extensions;
 using MyProject.Core;
 using MyProject.Core.Identity;
@@ -39,7 +43,7 @@ namespace MyProject.Business.Services
                 {
                     return new JwtModel
                     {
-                        TokenString = JwtFactory.GenerateEncodedToken(user.Id, user.Email)
+                        TokenString = JwtFactory.GenerateEncodedToken(user.Id, user.Email, new List<Claim>())
                     }.Some<JwtModel, Error>();
                 },
                 () => Option.None<JwtModel, Error>(new Error("Invalid credentials.")));
