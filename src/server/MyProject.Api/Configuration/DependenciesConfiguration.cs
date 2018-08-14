@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 using MyProject.Core.Configuration;
 using MyProject.Data.Entities;
 using MyProject.Data.EntityFramework;
@@ -83,6 +85,13 @@ namespace MyProject.Api.Configuration
             {
                 setup.SwaggerDoc("v1", new Info { Title = "MyProject.Api", Version = "v1" });
                 setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "MyProject.Api.Documentation.xml"));
+
+                setup.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Enter 'Bearer {token}' (don't forget to add 'bearer') into the field below.", Name = "Authorization", Type = "apiKey" });
+
+                setup.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", Enumerable.Empty<string>() },
+                });
             });
         }
     }
