@@ -31,9 +31,9 @@ namespace MyProject.Core.Configuration
         public DateTime NotBefore { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// Gets or sets the "iat" (Issued At) Claim - The "iat" (issued at) claim identifies the time at which the JWT was issued.
+        /// Gets the "iat" (Issued At) Claim - The "iat" (issued at) claim identifies the time at which the JWT was issued.
         /// </summary>
-        public DateTime IssuedAt { get; set; } = DateTime.UtcNow;
+        public DateTime IssuedAt => DateTime.UtcNow;
 
         /// <summary>
         /// Gets or sets the timespan the token will be valid for (default is 120 min)

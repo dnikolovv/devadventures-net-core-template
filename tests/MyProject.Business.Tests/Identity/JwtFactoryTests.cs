@@ -29,7 +29,6 @@ namespace MyProject.Business.Tests.Identity
 
             _jwtConfiguration = fixture
                 .Build<JwtConfiguration>()
-                .Without(config => config.IssuedAt)
                 .Without(config => config.NotBefore)
                 .With(config => config.SigningCredentials, new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256))
                 .Create();
