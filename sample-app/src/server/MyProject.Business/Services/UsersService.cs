@@ -1,10 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Optional;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Security.Claims;
 using MyProject.Business.Extensions;
 using MyProject.Core;
 using MyProject.Core.Identity;
@@ -13,6 +7,10 @@ using MyProject.Core.Services;
 using MyProject.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Optional;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MyProject.Business.Services
 {
@@ -53,11 +51,14 @@ namespace MyProject.Business.Services
         {
             var user = Mapper.Map<User>(model);
 
-            var creationResult = await UserManager.CreateAsync(user, model.Password);
+            var creationResult = (await UserManager.CreateAsync(user, model.Password))
+                .SomeWhen(
+                    x => x.Succeeded,
+                    x => x.Errors.Select(e => e.Description).ToArray());
 
-            return creationResult.Succeeded ?
-                Mapper.Map<UserModel>(user).Some<UserModel, Error>() :
-                Option.None<UserModel, Error>(new Error(creationResult.Errors.Select(e => e.Description)));
+            return creationResult.Match(
+                some: _ => Mapper.Map<UserModel>(user).Some<UserModel, Error>(),
+                none: errors => Option.None<UserModel, Error>(new Error(errors)));
         }
     }
 }

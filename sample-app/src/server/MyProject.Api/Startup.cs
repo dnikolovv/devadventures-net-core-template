@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using MyProject.Api.Configuration;
 using MyProject.Api.Filters;
 using MyProject.Api.ModelBinders;
@@ -13,6 +8,13 @@ using MyProject.Core.Configuration;
 using MyProject.Core.Identity;
 using MyProject.Core.Services;
 using MyProject.Data.EntityFramework;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace MyProject.Api
 {
@@ -25,6 +27,7 @@ namespace MyProject.Api
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -37,6 +40,8 @@ namespace MyProject.Api
             services.AddSwagger();
             services.AddJwtIdentity(Configuration.GetSection(nameof(JwtConfiguration)));
 
+            services.AddLogging(logBuilder => logBuilder.AddSerilog(dispose: true));
+
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IJwtFactory, JwtFactory>();
 
@@ -45,7 +50,8 @@ namespace MyProject.Api
                 options.ModelBinderProviders.Insert(0, new OptionModelBinderProvider());
                 options.Filters.Add<ExceptionFilter>();
                 options.Filters.Add<ModelStateFilter>();
-            });
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext dbContext)
@@ -54,9 +60,14 @@ namespace MyProject.Api
             {
                 dbContext.Database.EnsureCreated();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             loggerFactory.AddLogging(Configuration.GetSection("Logging"));
 
+            app.UseHttpsRedirection();
             app.UseSwagger("My Web API.");
             app.UseStaticFiles();
             app.UseAuthentication();

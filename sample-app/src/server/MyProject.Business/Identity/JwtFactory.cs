@@ -1,22 +1,22 @@
-﻿using Microsoft.Extensions.Options;
+﻿using MyProject.Core.Configuration;
+using MyProject.Core.Identity;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using MyProject.Core.Configuration;
-using MyProject.Core.Identity;
 
 namespace MyProject.Business.Identity
 {
     public class JwtFactory : IJwtFactory
     {
-        private readonly JwtConfiguration _jwtOptions;
+        private readonly JwtConfiguration _jwtConfiguration;
 
         public JwtFactory(IOptions<JwtConfiguration> jwtOptions)
         {
-            _jwtOptions = jwtOptions.Value;
-            ThrowIfInvalidOptions(_jwtOptions);
+            _jwtConfiguration = jwtOptions.Value;
+            ThrowIfInvalidOptions(_jwtConfiguration);
         }
 
         public string GenerateEncodedToken(string userId, string email, IEnumerable<Claim> additionalClaims)
@@ -25,18 +25,18 @@ namespace MyProject.Business.Identity
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId),
                 new Claim(JwtRegisteredClaimNames.Email, email),
-                new Claim(JwtRegisteredClaimNames.Jti, _jwtOptions.JtiGenerator()),
-                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
+                new Claim(JwtRegisteredClaimNames.Jti, _jwtConfiguration.JtiGenerator()),
+                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64),
             }
             .Concat(additionalClaims);
 
             var jwt = new JwtSecurityToken(
-                issuer: _jwtOptions.Issuer,
-                audience: _jwtOptions.Audience,
+                issuer: _jwtConfiguration.Issuer,
+                audience: _jwtConfiguration.Audience,
                 claims: claims,
-                notBefore: _jwtOptions.NotBefore,
-                expires: _jwtOptions.Expiration,
-                signingCredentials: _jwtOptions.SigningCredentials);
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.Add(_jwtConfiguration.ValidFor),
+                signingCredentials: _jwtConfiguration.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 

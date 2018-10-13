@@ -6,6 +6,18 @@ namespace MyProject.Business.Extensions
 {
     public static class OptionExtensions
     {
+        public static Option<T, TException> SomeWhen<T, TException>(
+            this T value,
+            Func<T, bool> predicate,
+            Func<T, TException> exceptionFactory)
+        {
+            var result = predicate(value);
+
+            return result ?
+                value.Some<T, TException>() :
+                Option.None<T, TException>(exceptionFactory(value));
+        }
+
         public static async Task<Option<T>> FilterAsync<T>(this Option<T> option, Func<T, Task<bool>> predicate)
         {
             if (predicate == null)

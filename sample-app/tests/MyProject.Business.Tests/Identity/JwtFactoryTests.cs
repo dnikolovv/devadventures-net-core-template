@@ -29,7 +29,6 @@ namespace MyProject.Business.Tests.Identity
 
             _jwtConfiguration = fixture
                 .Build<JwtConfiguration>()
-                .Without(config => config.NotBefore)
                 .With(config => config.SigningCredentials, new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256))
                 .Create();
 
@@ -64,8 +63,8 @@ namespace MyProject.Business.Tests.Identity
             // The jwt should contain all of the extra claims
             claims.ShouldAllBe(c => jwt.Claims.Any(x => x.Type == c.Type && x.Value == c.Value));
 
-            jwt.ValidFrom.ShouldBe(_jwtConfiguration.NotBefore, TimeSpan.FromSeconds(10));
-            jwt.ValidTo.ShouldBe(_jwtConfiguration.Expiration, TimeSpan.FromSeconds(10));
+            jwt.ValidFrom.ShouldBe(DateTime.UtcNow, TimeSpan.FromSeconds(10));
+            jwt.ValidTo.ShouldBe(DateTime.UtcNow.Add(_jwtConfiguration.ValidFor), TimeSpan.FromSeconds(10));
         }
 
         [Theory]
@@ -84,8 +83,8 @@ namespace MyProject.Business.Tests.Identity
             jwt.Claims.ShouldContain(c => c.Type == JwtRegisteredClaimNames.Email && c.Value == email);
             jwt.Claims.ShouldContain(c => c.Type == JwtRegisteredClaimNames.Aud && c.Value == _jwtConfiguration.Audience);
 
-            jwt.ValidFrom.ShouldBe(_jwtConfiguration.NotBefore, TimeSpan.FromSeconds(10));
-            jwt.ValidTo.ShouldBe(_jwtConfiguration.Expiration, TimeSpan.FromSeconds(10));
+            jwt.ValidFrom.ShouldBe(DateTime.UtcNow, TimeSpan.FromSeconds(10));
+            jwt.ValidTo.ShouldBe(DateTime.UtcNow.Add(_jwtConfiguration.ValidFor), TimeSpan.FromSeconds(10));
         }
     }
 }
