@@ -1,11 +1,11 @@
->Check out the [introductory article](https://devadventures.net/2018/06/09/introducing-dev-adventures-net-core-project-template/).
-
-# .NET Core Web API Template
-This template is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dnikolovv.dev-adventures-project-setup#overview).
+This template is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dnikolovv.dev-adventures-project-setup#overview). Also make sure to check out the [sample RealWorld app](https://github.com/dnikolovv/dev-adventures-realworld).
 
 After installing the VSIX you will see the template available under Visual C#:
 
 ![template-in-vs](https://devadventures.net/wp-content/uploads/2018/06/template-in-vs.png)
+
+> To get familiar with the Maybe and Either monads you can take a look at the [introductory Option article](https://devadventures.net/2018/04/17/forget-object-reference-not-set-to-an-instance-of-an-object-functional-adventures-in-c/), [real life examples of Either in C#](https://devadventures.net/2018/09/20/real-life-examples-of-functional-c-sharp-either/) and the  [template introductory article](https://devadventures.net/2018/06/09/introducing-dev-adventures-net-core-project-template/).
+
 
 ---
 
