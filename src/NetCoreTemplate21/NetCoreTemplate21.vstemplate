@@ -1,0 +1,37 @@
+<VSTemplate Version="2.0.0" Type="ProjectGroup"
+    xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>Dev Adventures .NET Core API</Name>
+    <DefaultName>ProjectName</DefaultName>
+    <Description>A simple yet mature project setup.</Description>
+    <Icon>NetCoreTemplate21.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>Web</ProjectSubType>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Api" CopyParameters="true">
+          api\Template.Api.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Business" CopyParameters="true">
+          business\Template.Business.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Core" CopyParameters="true">
+          core\Template.Core.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Data" CopyParameters="true">
+          data\Template.Data.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Data.EntityFramework" CopyParameters="true">
+          data-entityframework\Template.Data.EntityFramework.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Business.Tests" CopyParameters="true">
+          tests\Template.Business.Tests.vstemplate
+        </ProjectTemplateLink>
+    </ProjectCollection>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>NetCoreTemplateWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>NetCoreTemplateWizard.Wizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
