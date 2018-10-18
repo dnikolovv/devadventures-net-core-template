@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using $ext_safeprojectname$.Api.OperationFilters;
 using $ext_safeprojectname$.Core.Configuration;
 using $ext_safeprojectname$.Data.Entities;
 using $ext_safeprojectname$.Data.EntityFramework;
@@ -92,6 +93,8 @@ namespace $safeprojectname$.Configuration
                 {
                     { "Bearer", Enumerable.Empty<string>() },
                 });
+
+                setup.OperationFilter<OptionOperationFilter>();
             });
         }
     }

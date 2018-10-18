@@ -35,6 +35,9 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="ExceptionFilter.cs">ExceptionFilter.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ModelStateFilter.cs">ModelStateFilter.cs</ProjectItem>
       </Folder>
+      <Folder Name="OperationFilters" TargetFolderName="OperationFilters">
+        <ProjectItem ReplaceParameters="true" TargetFileName="OptionOperationFilter.cs">OptionOperationFilter.cs</ProjectItem>
+      </Folder>
       <Folder Name="logs" TargetFolderName="logs">
       </Folder>
       <Folder Name="ModelBinders" TargetFolderName="ModelBinders">

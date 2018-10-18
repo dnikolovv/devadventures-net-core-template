@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DevAdventuresWizard.fc785eac-b85d-48f0-99b2-c6d9b394449f" Version="1.6" Language="en-US" Publisher="Dobromir Nikolov" />
+        <Identity Id="DevAdventuresWizard.fc785eac-b85d-48f0-99b2-c6d9b394449f" Version="1.7" Language="en-US" Publisher="Dobromir Nikolov" />
         <DisplayName>Dev Adventures .NET Core project setup.</DisplayName>
         <Description xml:space="preserve">A robust and maintainable production-ready .NET Core template.</Description>
         <MoreInfo>https://devadventures.net</MoreInfo>
