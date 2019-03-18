@@ -90,7 +90,7 @@ namespace NetCoreTemplateWizard
         private void DeleteUnneededFolders(string directory)
         {
             var oldFolderPath = Path.Combine(Directory.GetParent(directory).FullName, _safeProjectName);
-            Directory.Delete(oldFolderPath, true);
+            Directory.Delete(oldFolderPath, recursive: true);
         }
 
         private void MoveProjectsToCorrespondingFolders(IEnumerable<string> projectPaths, string sourceFolderPath, string testsFolderPath)
