@@ -2,7 +2,7 @@ This template is available in the [Visual Studio Marketplace](https://marketplac
 
 After installing the VSIX you will see the template available under Visual C#:
 
-![template-in-vs](https://devadventures.net/wp-content/uploads/2018/06/template-in-vs.png)
+![template-in-vs](./images/template-in-vs.JPG)
 
 > To get familiar with the Maybe and Either monads you can take a look at the [introductory Option article](https://devadventures.net/2018/04/17/forget-object-reference-not-set-to-an-instance-of-an-object-functional-adventures-in-c/), [real life examples of Either in C#](https://devadventures.net/2018/09/20/real-life-examples-of-functional-c-sharp-either/) and the  [template introductory article](https://devadventures.net/2018/06/09/introducing-dev-adventures-net-core-project-template/).
 
@@ -35,24 +35,24 @@ After installing the VSIX you will see the template available under Visual C#:
 
 - [x] Swagger UI + Fully Documented Controllers <br>
 
-![swagger-ui](https://devadventures.net/wp-content/uploads/2018/06/swagger-ui-new.png)
+![swagger-ui](./images/swagger-ui.JPG)
 
 - [x] Global Model Errors Handler <br>
 
-![model-errors](https://devadventures.net/wp-content/uploads/2018/05/model-errors.png)
+![model-errors](./images/model-errors.JPG)
 - [x] Global Environment-Dependent Exception Handler <br>
 Development <br>
-![exception-development](https://devadventures.net/wp-content/uploads/2018/06/exception-development.png)<br> 
+![exception-development](./images/exception-development.JPG)<br> 
 Production <br>
-![enter image description here](https://devadventures.net/wp-content/uploads/2018/05/exception-production.png)
+![enter image description here](./images/exception-prod.JPG)
 - [x] Neatly organized solution structure <br>
-![solution-structure](https://devadventures.net/wp-content/uploads/2018/05/solution-structure.png)
+![solution-structure](./images/solution-structure.JPG)
 - [x] Thin Controllers <br>
-![thin-controllers](https://devadventures.net/wp-content/uploads/2018/05/tight-controllers.png) <br>
+![thin-controllers](./images/thin-controllers.JPG) <br>
 - [x] Robust service layer using the [Either](http://optional-github.com) monad. <br>
-![either-monad](https://devadventures.net/wp-content/uploads/2018/05/either-monad.png)<br>
+![either-monad](./images/either-monad.JPG)<br>
 - [x] Safe query string parameter model binding using the [Option](http://optional-github.com) monad.<br>
-![optional-binding](https://devadventures.net/wp-content/uploads/2018/05/option-binding-4-1.png)<br>
+![optional-binding](./images/optional-binding.JPG)<br>
 
 ### Test Suite
 - [x] xUnit
@@ -61,4 +61,4 @@ Production <br>
 - [x] Shouldly
 - [x] Arrange Act Assert Pattern
 
-![enter image description here](https://devadventures.net/wp-content/uploads/2018/05/sample-test.png)
+![test-suite](./images/test-suite.JPG)
